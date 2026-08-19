@@ -2,415 +2,313 @@
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>⏳ العد التنازلي - 200 يوم</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>⏳ العد التنازلي</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&display=swap');
-        
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
         }
 
         body {
-            font-family: 'Cairo', sans-serif;
-            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Cairo', sans-serif;
+            background: #0f0f23;
+            color: #fff;
             min-height: 100vh;
             display: flex;
-            justify-content: center;
+            flex-direction: column;
             align-items: center;
-            color: white;
-            overflow: hidden;
+            justify-content: flex-start;
+            padding: 20px 16px;
+            overflow-x: hidden;
         }
 
-        /* خلفية متحركة */
-        .bg-animation {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -1;
-            overflow: hidden;
-        }
-
-        .bg-animation span {
-            position: absolute;
-            width: 20px;
-            height: 20px;
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 50%;
-            animation: float 15s infinite linear;
-        }
-
-        @keyframes float {
-            0% { transform: translateY(100vh) scale(0); opacity: 0; }
-            10% { opacity: 1; }
-            90% { opacity: 1; }
-            100% { transform: translateY(-10vh) scale(1.5); opacity: 0; }
-        }
-
-        .container {
+        .header {
             text-align: center;
-            padding: 2rem;
-            max-width: 900px;
+            margin-bottom: 24px;
             width: 100%;
         }
 
-        .title {
-            font-size: 2.5rem;
-            font-weight: 900;
-            margin-bottom: 0.5rem;
-            text-shadow: 0 0 20px rgba(233, 69, 96, 0.5);
-            background: linear-gradient(45deg, #e94560, #ff6b6b, #feca57);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+        .header h1 {
+            font-size: 22px;
+            font-weight: 700;
+            color: #e94560;
+            margin-bottom: 4px;
         }
 
-        .subtitle {
-            font-size: 1.2rem;
-            color: #a0a0a0;
-            margin-bottom: 2rem;
+        .header p {
+            font-size: 13px;
+            color: #888;
         }
 
-        .date-range {
+        .dates-card {
+            background: #1a1a2e;
+            border-radius: 16px;
+            padding: 14px 20px;
+            width: 100%;
+            max-width: 380px;
+            margin-bottom: 20px;
             display: flex;
-            justify-content: center;
+            justify-content: space-between;
             align-items: center;
-            gap: 1rem;
-            margin-bottom: 2rem;
-            flex-wrap: wrap;
+            border: 1px solid #2a2a4e;
         }
 
-        .date-box {
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            padding: 0.8rem 1.5rem;
-            border-radius: 15px;
-            font-size: 1rem;
+        .date-item {
+            text-align: center;
+        }
+
+        .date-item .label {
+            font-size: 10px;
+            color: #666;
+            margin-bottom: 4px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .date-item .value {
+            font-size: 14px;
+            font-weight: 600;
+            color: #fff;
         }
 
         .date-arrow {
-            font-size: 1.5rem;
             color: #e94560;
+            font-size: 18px;
         }
 
-        .countdown-wrapper {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-            gap: 1.5rem;
-            margin-bottom: 2rem;
+        .big-days {
+            text-align: center;
+            margin-bottom: 20px;
         }
 
-        .time-box {
-            background: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(233, 69, 96, 0.3);
-            border-radius: 20px;
-            padding: 2rem 1rem;
-            position: relative;
-            overflow: hidden;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-
-        .time-box:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 30px rgba(233, 69, 96, 0.3);
-        }
-
-        .time-box::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 3px;
-            background: linear-gradient(90deg, #e94560, #ff6b6b);
-            animation: shimmer 2s infinite;
-        }
-
-        @keyframes shimmer {
-            0% { transform: translateX(-100%); }
-            100% { transform: translateX(100%); }
-        }
-
-        .time-value {
-            font-size: 3.5rem;
+        .big-days .number {
+            font-size: 72px;
             font-weight: 900;
+            color: #e94560;
+            line-height: 1;
+            text-shadow: 0 0 20px rgba(233, 69, 96, 0.3);
+        }
+
+        .big-days .text {
+            font-size: 16px;
+            color: #aaa;
+            margin-top: 4px;
+        }
+
+        .timer-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+            width: 100%;
+            max-width: 380px;
+            margin-bottom: 24px;
+        }
+
+        .timer-box {
+            background: #1a1a2e;
+            border-radius: 14px;
+            padding: 14px 8px;
+            text-align: center;
+            border: 1px solid #2a2a4e;
+        }
+
+        .timer-box .num {
+            font-size: 28px;
+            font-weight: 800;
             color: #fff;
             display: block;
             line-height: 1;
-            text-shadow: 0 0 10px rgba(233, 69, 96, 0.5);
         }
 
-        .time-label {
-            font-size: 1rem;
-            color: #a0a0a0;
-            margin-top: 0.5rem;
+        .timer-box .label {
+            font-size: 11px;
+            color: #666;
+            margin-top: 6px;
             text-transform: uppercase;
-            letter-spacing: 2px;
         }
 
         .progress-section {
-            margin-top: 2rem;
+            width: 100%;
+            max-width: 380px;
+            margin-bottom: 20px;
         }
 
-        .progress-label {
+        .progress-header {
             display: flex;
             justify-content: space-between;
-            margin-bottom: 0.5rem;
-            font-size: 0.9rem;
-            color: #a0a0a0;
+            margin-bottom: 8px;
+            font-size: 12px;
+            color: #888;
         }
 
         .progress-bar {
             width: 100%;
-            height: 12px;
-            background: rgba(255, 255, 255, 0.1);
+            height: 8px;
+            background: #1a1a2e;
             border-radius: 10px;
             overflow: hidden;
-            position: relative;
         }
 
         .progress-fill {
             height: 100%;
-            background: linear-gradient(90deg, #e94560, #ff6b6b, #feca57);
+            background: linear-gradient(90deg, #e94560, #ff6b6b);
             border-radius: 10px;
             transition: width 1s ease;
-            position: relative;
-            box-shadow: 0 0 10px rgba(233, 69, 96, 0.5);
+            box-shadow: 0 0 8px rgba(233, 69, 96, 0.4);
         }
 
-        .progress-fill::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
-            animation: progress-shine 2s infinite;
-        }
-
-        @keyframes progress-shine {
-            0% { transform: translateX(-100%); }
-            100% { transform: translateX(100%); }
-        }
-
-        .status-message {
-            margin-top: 1.5rem;
-            font-size: 1.1rem;
-            padding: 1rem;
-            border-radius: 15px;
+        .status {
+            text-align: center;
+            padding: 14px 20px;
+            border-radius: 14px;
             background: rgba(233, 69, 96, 0.1);
             border: 1px solid rgba(233, 69, 96, 0.3);
+            width: 100%;
+            max-width: 380px;
             display: none;
+            font-size: 14px;
+            font-weight: 600;
         }
 
-        .status-message.active {
+        .status.active {
             display: block;
-            animation: pulse 1.5s infinite;
-        }
-
-        @keyframes pulse {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.7; }
-        }
-
-        .days-remaining {
-            font-size: 4rem;
-            font-weight: 900;
-            color: #e94560;
-            text-shadow: 0 0 20px rgba(233, 69, 96, 0.5);
-            margin: 1rem 0;
         }
 
         .footer {
-            margin-top: 2rem;
-            color: #666;
-            font-size: 0.8rem;
+            margin-top: auto;
+            padding-top: 20px;
+            text-align: center;
+            font-size: 11px;
+            color: #444;
         }
 
-        /* تأثيرات للأرقام */
-        .flip {
-            animation: flip-in 0.6s ease;
+        /* Animation for numbers */
+        @keyframes pulse-num {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
         }
 
-        @keyframes flip-in {
-            0% { transform: rotateX(-90deg); opacity: 0; }
-            100% { transform: rotateX(0); opacity: 1; }
-        }
-
-        /* Responsive */
-        @media (max-width: 768px) {
-            .title { font-size: 1.8rem; }
-            .time-value { font-size: 2.5rem; }
-            .countdown-wrapper { grid-template-columns: repeat(2, 1fr); }
-            .days-remaining { font-size: 3rem; }
-        }
-
-        @media (max-width: 480px) {
-            .countdown-wrapper { grid-template-columns: 1fr; }
-            .time-box { padding: 1.5rem; }
+        .timer-box .num {
+            animation: pulse-num 2s infinite;
         }
     </style>
 </head>
 <body>
-    <!-- خلفية متحركة -->
-    <div class="bg-animation" id="bgAnimation"></div>
 
-    <div class="container">
-        <h1 class="title">⏳ العد التنازلي</h1>
-        <p class="subtitle">200 يوم من الأهداف والإنجازات</p>
+    <div class="header">
+        <h1>⏳ العد التنازلي</h1>
+        <p>200 يوم من الأهداف والإنجازات</p>
+    </div>
 
-        <div class="date-range">
-            <div class="date-box">📅 19 أغسطس 2026</div>
-            <div class="date-arrow">➜</div>
-            <div class="date-box">🎯 6 مارس 2027</div>
+    <div class="dates-card">
+        <div class="date-item">
+            <div class="label">من</div>
+            <div class="value">19/8/2026</div>
         </div>
-
-        <!-- العد التنازلي الرئيسي -->
-        <div class="countdown-wrapper">
-            <div class="time-box">
-                <span class="time-value" id="days">00</span>
-                <div class="time-label">يوم</div>
-            </div>
-            <div class="time-box">
-                <span class="time-value" id="hours">00</span>
-                <div class="time-label">ساعة</div>
-            </div>
-            <div class="time-box">
-                <span class="time-value" id="minutes">00</span>
-                <div class="time-label">دقيقة</div>
-            </div>
-            <div class="time-box">
-                <span class="time-value" id="seconds">00</span>
-                <div class="time-label">ثانية</div>
-            </div>
-        </div>
-
-        <!-- عدد الأيام المتبقية -->
-        <div class="days-remaining" id="daysRemaining">200</div>
-        <p style="color: #a0a0a0; margin-bottom: 1rem;">يوم متبقي</p>
-
-        <!-- شريط التقدم -->
-        <div class="progress-section">
-            <div class="progress-label">
-                <span>التقدم</span>
-                <span id="progressPercent">0%</span>
-            </div>
-            <div class="progress-bar">
-                <div class="progress-fill" id="progressBar" style="width: 0%"></div>
-            </div>
-        </div>
-
-        <!-- رسالة الحالة -->
-        <div class="status-message" id="statusMessage">
-            🎉 وصلنا للهدف! انتهى العد التنازلي!
-        </div>
-
-        <div class="footer">
-            <p>💡 الكود يعمل تلقائياً ويحدث كل ثانية</p>
+        <div class="date-arrow">➜</div>
+        <div class="date-item">
+            <div class="label">إلى</div>
+            <div class="value">6/3/2027</div>
         </div>
     </div>
 
+    <div class="big-days">
+        <div class="number" id="bigDays">200</div>
+        <div class="text">يوم متبقي</div>
+    </div>
+
+    <div class="timer-grid">
+        <div class="timer-box">
+            <span class="num" id="days">00</span>
+            <div class="label">يوم</div>
+        </div>
+        <div class="timer-box">
+            <span class="num" id="hours">00</span>
+            <div class="label">ساعة</div>
+        </div>
+        <div class="timer-box">
+            <span class="num" id="minutes">00</span>
+            <div class="label">دقيقة</div>
+        </div>
+        <div class="timer-box">
+            <span class="num" id="seconds">00</span>
+            <div class="label">ثانية</div>
+        </div>
+    </div>
+
+    <div class="progress-section">
+        <div class="progress-header">
+            <span>التقدم</span>
+            <span id="progressText">0%</span>
+        </div>
+        <div class="progress-bar">
+            <div class="progress-fill" id="progressBar" style="width: 0%"></div>
+        </div>
+    </div>
+
+    <div class="status" id="status">
+        🎉 وصلنا للهدف! انتهى العد التنازلي!
+    </div>
+
+    <div class="footer">
+        <p>💡 يتحدث تلقائياً كل ثانية</p>
+    </div>
+
     <script>
-        // ===== إعدادات التواريخ =====
         const START_DATE = new Date('2026-08-19T00:00:00');
         const END_DATE = new Date('2027-03-06T00:00:00');
         const TOTAL_DURATION = END_DATE - START_DATE;
 
-        // ===== عناصر DOM =====
         const els = {
             days: document.getElementById('days'),
             hours: document.getElementById('hours'),
             minutes: document.getElementById('minutes'),
             seconds: document.getElementById('seconds'),
-            daysRemaining: document.getElementById('daysRemaining'),
+            bigDays: document.getElementById('bigDays'),
             progressBar: document.getElementById('progressBar'),
-            progressPercent: document.getElementById('progressPercent'),
-            statusMessage: document.getElementById('statusMessage')
+            progressText: document.getElementById('progressText'),
+            status: document.getElementById('status')
         };
 
-        // ===== إنشاء خلفية متحركة =====
-        function createBackgroundParticles() {
-            const container = document.getElementById('bgAnimation');
-            for (let i = 0; i < 30; i++) {
-                const span = document.createElement('span');
-                span.style.left = Math.random() * 100 + '%';
-                span.style.animationDelay = Math.random() * 15 + 's';
-                span.style.animationDuration = (10 + Math.random() * 20) + 's';
-                span.style.width = span.style.height = (5 + Math.random() * 25) + 'px';
-                container.appendChild(span);
-            }
-        }
-
-        // ===== تحديث العد التنازلي =====
         function updateCountdown() {
             const now = new Date();
             const remaining = END_DATE - now;
 
             if (remaining <= 0) {
-                // انتهى العد التنازلي
                 els.days.textContent = '00';
                 els.hours.textContent = '00';
                 els.minutes.textContent = '00';
                 els.seconds.textContent = '00';
-                els.daysRemaining.textContent = '0';
+                els.bigDays.textContent = '0';
                 els.progressBar.style.width = '100%';
-                els.progressPercent.textContent = '100%';
-                els.statusMessage.classList.add('active');
+                els.progressText.textContent = '100%';
+                els.status.classList.add('active');
                 return;
             }
 
-            // حساب الوقت المتبقي
             const days = Math.floor(remaining / (1000 * 60 * 60 * 24));
             const hours = Math.floor((remaining % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
             const minutes = Math.floor((remaining % (1000 * 60 * 60)) / (1000 * 60));
             const seconds = Math.floor((remaining % (1000 * 60)) / 1000);
 
-            // تحديث العرض
-            updateValue(els.days, days);
-            updateValue(els.hours, hours);
-            updateValue(els.minutes, minutes);
-            updateValue(els.seconds, seconds);
-            
-            els.daysRemaining.textContent = days;
+            els.days.textContent = String(days).padStart(2, '0');
+            els.hours.textContent = String(hours).padStart(2, '0');
+            els.minutes.textContent = String(minutes).padStart(2, '0');
+            els.seconds.textContent = String(seconds).padStart(2, '0');
+            els.bigDays.textContent = days;
 
-            // حساب نسبة التقدم
             const elapsed = now - START_DATE;
             const progress = Math.max(0, Math.min(100, (elapsed / TOTAL_DURATION) * 100));
             els.progressBar.style.width = progress + '%';
-            els.progressPercent.textContent = progress.toFixed(1) + '%';
-
-            // إخفاء رسالة الحالة
-            els.statusMessage.classList.remove('active');
+            els.progressText.textContent = progress.toFixed(1) + '%';
         }
 
-        // ===== تحديث القيمة مع تأثير =====
-        let previousValues = {};
-        function updateValue(element, value) {
-            const strValue = String(value).padStart(2, '0');
-            if (previousValues[element.id] !== strValue) {
-                element.textContent = strValue;
-                element.classList.remove('flip');
-                void element.offsetWidth; // trigger reflow
-                element.classList.add('flip');
-                previousValues[element.id] = strValue;
-            }
-        }
-
-        // ===== التشغيل =====
-        createBackgroundParticles();
         updateCountdown();
         setInterval(updateCountdown, 1000);
-
-        // ===== رسالة ترحيبية في الكونسول =====
-        console.log('%c⏳ Countdown Timer', 'color: #e94560; font-size: 24px; font-weight: bold;');
-        console.log('%cمن 19/8/2026 إلى 6/3/2027 (200 يوم)', 'color: #666; font-size: 14px;');
     </script>
+
 </body>
 </html>
