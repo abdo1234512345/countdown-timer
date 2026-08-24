@@ -1,9 +1,3 @@
-from pathlib import Path
-
-readme = """# ⏳ Countdown Ultra
-
-A modern Arabic countdown timer with a glassmorphism UI, animated background, particles, progress indicators, and a live countdown.
-
 ## ✨ Features
 
 - Live countdown showing:
